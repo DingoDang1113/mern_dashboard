@@ -32,9 +32,9 @@ const Navbar = () => {
                 </IconButton>
                 <FlexBetween
                     backgroundColor={theme.palette.background.alt}
-                    boarderRadius="9px"
+                    borderRadius="9px"
                     gap="3rem"
-                    p="0.1rem 1.5rem" /* padding, 0.1 top/bottom, 1.5 left/right */
+                    p="0.1rem 1.5rem" 
                 >
                     <InputBase placeholder="Search..." />
                     <IconButton>
