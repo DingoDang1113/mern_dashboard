@@ -40,11 +40,13 @@ const Navbar = () => {
                     <IconButton>
                         <Search />
                     </IconButton>
-
                 </FlexBetween>
-
-
             </FlexBetween>
+
+            {/* Right Side */}
+            
+
+
             
         </Toolbar>
 
