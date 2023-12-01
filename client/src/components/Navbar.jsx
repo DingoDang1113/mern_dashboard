@@ -13,6 +13,8 @@ import { setMode } from 'state';
 import picsImage from "assets/pics.jpg";
 import { AppBar, IconButton, InputBase, Toolbar, useTheme } from '@mui/material';
 
+
+
 const Navbar = () => {
     const dispatch = useDispatch();
     const theme = useTheme();
