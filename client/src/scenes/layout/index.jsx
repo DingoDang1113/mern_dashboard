@@ -19,7 +19,10 @@ const Layout = () => {
       setIsSidebarOpen = {setIsSidebarOpen}
     />
     <Box>
-      <NavBar />
+      <NavBar 
+      isSidebarOpen = {isSidebarOpen}
+      setIsSidebarOpen = {setIsSidebarOpen} 
+    />
       <Outlet />  //where dashboard will be located
     </Box>
   </Box>
