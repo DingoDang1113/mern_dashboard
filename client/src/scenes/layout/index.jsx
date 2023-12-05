@@ -24,13 +24,13 @@ const Layout = () => {
       isSidebarOpen = {isSidebarOpen}
       setIsSidebarOpen = {setIsSidebarOpen}
     />
-    <Box>
+    <Box flexGrow ={1}>
       <NavBar 
       user= {data || {} }
       isSidebarOpen = {isSidebarOpen}
       setIsSidebarOpen = {setIsSidebarOpen} 
     />
-      <Outlet />  //where dashboard will be located
+      <Outlet />  {/*where dashboard will be located */}
     </Box>
   </Box>
 };

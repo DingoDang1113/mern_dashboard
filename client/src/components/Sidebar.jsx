@@ -112,7 +112,7 @@ const Sidebar = ({
     }, [pathname])
 
 
-  return <Box component= "nav">
+  return <Box component= "nav" >
     {isSidebarOpen && (
         <Drawer 
             open = {isSidebarOpen}
