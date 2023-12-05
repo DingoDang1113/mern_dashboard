@@ -121,17 +121,21 @@ const Sidebar = ({
             anchor='left'
             sx={{
                 width: drawerWidth,
+                height: "100vh",
                 "& .MuiDrawer-paper" : {
                     color: theme.palette.secondary[200],
                     backgroundColor: theme.palette.background.alt,
-                    boxSixing: "border-box",
+                    boxSizing: "border-box",
                     borderWidth: isNonMobile ? 0 : "2px",
-                    width: drawerWidth
-                }
+                    width: drawerWidth,
+                    height: "100vh",
+                    overflowY: "auto"
+                }, 
+                
             }}
         >
-            <Box width="100%">
-                <Box m= "1.5rem 2rem 2rem 3rem">
+            <Box width="100%" height="100%">
+                <Box m= "1.5rem 2rem 0.5rem 3rem">
                     <FlexBetween color={theme.palette.secondary.main}>
                         <Box display="flex" alignItems="center" gap="0.5rem" >
                             <Typography variant='h4' fontWeight="bold" >
@@ -151,7 +155,7 @@ const Sidebar = ({
                     {navItems.map(({text, icon}) => {
                         if (!icon) {
                             return (
-                                <Typography key={text} sx={{m: "2.25rem 0 1rem 3rem"}}>
+                                <Typography key={text} sx={{m: "2.25rem 0 0.5rem 3rem"}}>
                                     {text}
                                 </Typography>
                             )
