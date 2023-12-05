@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
     LightModeOutlined,
     DarkModeOutlined, 
@@ -16,11 +16,17 @@ import { AppBar, IconButton, InputBase, Toolbar, useTheme } from '@mui/material'
 
 
 const Navbar = ({
+    user,
     isSidebarOpen,
     setIsSidebarOpen,
 }) => {
     const dispatch = useDispatch();
     const theme = useTheme();
+
+    const [anchorEl, setAnchorEl] = useState(null);
+    const isOpen = Boolean(anchorEl);
+    const handleClick = (e) => setAnchorEl(e.currentTarget);
+    const handleClose = () => setAnchorEl(null);
     
     return (
         <AppBar sx={{
@@ -45,6 +51,7 @@ const Navbar = ({
                     <IconButton>
                         <Search />
                     </IconButton>
+
                 </FlexBetween>
             </FlexBetween>
 
@@ -63,6 +70,19 @@ const Navbar = ({
                     <SettingsOutlined sx={{ fontSize: "25px"}} />
                     
                 </IconButton> 
+
+                <FlexBetween>
+                    <Button onClick={handleClick} sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        textTransform: "none",
+                        gap: '1rem',
+                    }}>
+                        
+
+                    </Button>
+                </FlexBetween>
 
 
             </FlexBetween>
