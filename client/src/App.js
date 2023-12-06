@@ -8,6 +8,7 @@ import { Route, Routes } from "react-router-dom";
 
 import Layout from "scenes/layout";
 import Dashboard  from "scenes/dashboard";
+import Products from "scenes/products"
 
 
 
@@ -23,9 +24,10 @@ function App() {
           <CssBaseline />
             <Routes>
 
-              <Route element={<Layout />}>  // Layout component will be the main parent for any route included below
-                <Route path="/" element = {<Navigate to="/dashboard" replace />}  />  // Navigate component - will navigate to dashboard page if we land on default page
-                <Route path="/dashboard" element={<Dashboard />}/> // render dashboard
+              <Route element={<Layout />}>  {/* Layout component will be the main parent for any route included below */}
+                <Route path="/" element = {<Navigate to="/dashboard" replace />}  />  {/* Navigate component - will navigate to dashboard page if we land on default page */}
+                <Route path="/dashboard" element={<Dashboard />}/>   {/* render dashboard */}
+                <Route path="/products" element={<Products />} />
               </Route>
 
             </Routes>
