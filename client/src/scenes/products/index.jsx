@@ -1,5 +1,5 @@
 import React, { useState } from 'react'; 
-import { Box, Card, CardActions, CardContent, Collapse, Button, Typography, Rating, useTheme, useMediaQuery } from "@mui/material";
+import { Box, Card, CardActions, CardContent, Collapse, Button, Typography, Rating, useTheme, useMediaQuery, FormControl, InputLabel, MenuItem, Select, Menu} from "@mui/material";
 import { useGetProductsQuery } from 'state/api';
 import Header from "components/Header"; 
 
@@ -78,13 +78,61 @@ const Products = () => {
     const { data, isLoading } = useGetProductsQuery(); 
     const isNonMobile = useMediaQuery("(min-width: 1000px)");
 
-    const sortedData = data ? [...data].sort((a, b) => b.rating - a.rating) : [];
+    const [sortCriteria, setSortCriteria] = useState('rating'); 
+
+    const handleSortChange = (e) => {
+        setSortCriteria(e.target.value);
+    };
+
+    const sortData = (data, criteria) => {
+        switch (criteria) {
+            case 'alphabet': 
+                return [...data].sort((a, b) => a.name.localeCompare(b.name)); 
+            case 'rating': 
+                return [...data].sort((a, b) => b.rating - a.rating);
+            case 'price low': 
+                return [...data].sort((a, b) => a.price - b.price);
+            case 'price high': 
+                return [...data].sort((a, b) => b.price - a.price);
+            case 'yearlyUnitSold': 
+                return [...data].sort((a, b) => b.stat[0].yearlyTotalSoldUnits - a.stat[0].yearlyTotalSoldUnits);
+            default: 
+                return data;
+        }
+    }
+
+
+    const sortedData = data ? sortData(data, sortCriteria) : [];
     
     // console.log("data", data);
 
   return (
     <Box m="1.5rem 2.5rem" >
-        <Header title="Products" subtitle="See your list of products"  />
+        <Box display={"flex"} justifyContent="space-between" alignItems="center" >
+
+            <Header title="Products" subtitle="See your list of products"  />
+
+            <FormControl variant='outlined' sx={{ m: 1, minWidth: 100}}>
+                <InputLabel>Sort By</InputLabel>
+                <Select
+                value={sortCriteria}
+                onChange={handleSortChange}
+                label="Sort By"
+                >
+                    <MenuItem value="alphabet">Alphabet</MenuItem>
+                    <MenuItem value="rating">Rating</MenuItem>
+                    <MenuItem value="price low">Price(low to high)</MenuItem>
+                    <MenuItem value="price high">Price(high to low)</MenuItem>
+                    <MenuItem value="yearlyUnitSold">Popularity</MenuItem>
+
+                </Select>
+
+            </FormControl>
+        </Box>
+
+
+
+
         {sortedData.length > 0 ||  !isLoading ? (
             <Box 
                 mt={"20px"} 
