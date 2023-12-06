@@ -77,13 +77,15 @@ const Product = ({
 const Products = () => {
     const { data, isLoading } = useGetProductsQuery(); 
     const isNonMobile = useMediaQuery("(min-width: 1000px)");
+
+    const sortedData = data ? [...data].sort((a, b) => b.rating - a.rating) : [];
     
     // console.log("data", data);
 
   return (
     <Box m="1.5rem 2.5rem" >
         <Header title="Products" subtitle="See your list of products"  />
-        {data ||  !isLoading ? (
+        {sortedData.length > 0 ||  !isLoading ? (
             <Box 
                 mt={"20px"} 
                 display={"grid"} 
@@ -95,7 +97,7 @@ const Products = () => {
                     "& > div" : { gridColumn: isNonMobile ? undefined : "span 4"}
                 }}
                 >
-                    {data.map(
+                    {sortedData.map(
                       ({
                         _id, 
                         name,
@@ -129,4 +131,4 @@ const Products = () => {
   )
 }
 
-export default Products
+export default Products;
