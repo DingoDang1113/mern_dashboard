@@ -87,7 +87,7 @@ const Products = () => {
     const sortData = (data, criteria) => {
         switch (criteria) {
             case 'alphabet': 
-                return [...data].sort((a, b) => a.name.localeCompare(b.name)); 
+                return [...data].sort((a, b) => a.name.localeCompare(b.name));    //optimization: change sort to so
             case 'rating': 
                 return [...data].sort((a, b) => b.rating - a.rating);
             case 'price low': 
