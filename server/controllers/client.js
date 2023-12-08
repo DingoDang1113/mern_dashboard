@@ -1,6 +1,7 @@
 import Product from "../models/product.js";
 import ProductStat from "../models/ProductStat.js";
-import User from "../models/User.js"
+import User from "../models/User.js";
+import Transaction from "../models/Transaction.js";
 
 
 export const getProducts = async(req, res) => {
@@ -37,4 +38,18 @@ export const getCustomers = async(req, res) => {
     } catch(error) {
         res.status(404).json({ message: error.message });
     }
+};
+
+
+export const getTransactions = async(req, res) => {
+
+    try {
+        const transactions = await Transaction.find();
+
+        res.status(200).json(transactions)
+
+    } catch(error) {
+        res.status(404).json({ message:error.message });
+    }
+
 };
