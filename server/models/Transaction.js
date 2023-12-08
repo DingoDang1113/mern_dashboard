@@ -1,14 +1,18 @@
-import React from 'react';
 import mongoose from 'mongoose';
 
 
 const TransactionSchema = new mongoose.Schema (
     {
-        transactionId: String, 
+        userId: String,
+        cost: String,
+        products: {
+            type: [mongoose.Types.objectId],
+            of: Number,
+        },
             
     }, 
     {timestamps: true}
 );
 
-const Transactions = mongoose.model("Transactions", TransactionSchema);
-export default Transactions;
+const Transaction = mongoose.model("Transaction", TransactionSchema);
+export default Transaction;

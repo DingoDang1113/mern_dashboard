@@ -41,15 +41,15 @@ export const getCustomers = async(req, res) => {
 };
 
 
-export const getTransactions = async(req, res) => {
+// export const getTransactions = async(req, res) => {
 
-    try {
-        const transactions = await Transaction.find();
+//     try {
+//         const transactions = await Transaction.find();
 
-        res.status(200).json(transactions)
+//         res.status(200).json(transactions)
 
-    } catch(error) {
-        res.status(404).json({ message:error.message });
-    }
+//     } catch(error) {
+//         res.status(404).json({ message:error.message });
+//     }
 
-};
+// };

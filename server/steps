@@ -1,0 +1,2 @@
+1. model -> set up schema 
+2. Index.js -> import model & data, mongoose 
