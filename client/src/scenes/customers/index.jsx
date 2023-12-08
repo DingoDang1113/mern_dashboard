@@ -19,12 +19,12 @@ const Customers = () => {
         {
             field: "name",
             headerName: "Name",
-            flex: 0.5,
+            flex: 0.4,
         }, 
         {
             field: "email",
             headerName: "Email",
-            flex: 1,
+            flex: 0.8,
         }, 
         {
             field: "phoneNumber",
@@ -37,17 +37,17 @@ const Customers = () => {
         {
             field: "country",
             headerName: "Country",
-            flex: 0.4,
+            flex: 0.3,
         }, 
         {
             field: "occupation",
             headerName: "Occupation",
-            flex: 1,
+            flex: 0.5,
         }, 
         {
             field: "role",
             headerName: "Role",
-            flex: 0.5,
+            flex: 0.3,
         }, 
  
     ];
@@ -55,6 +55,31 @@ const Customers = () => {
   return <Box m="1.5rem 2.rem">
     <Header title="CUSTOMERS" subtitle="A list of Customers" />
     <Box mt="40px" height="75vh"
+      sx={{
+        "& .MuiDataGrid-root": {
+            border: "none"
+        },
+        "& .MuiDataGrid-cell": {
+            borderBottom: "none"
+        }, 
+        "& .MuiDataGrid-columnHeaders": {
+            backgroundColor: theme.palette.background.alt,
+            color: theme.palette.secondary[100],
+            borderBottom: "none"
+        }, 
+        "& .MuiDataGrid-virtualScroller": {
+            backgroundColor: theme.palette.primary.light,
+        }, 
+        "& .MuiDataGrid-footerContainer": {
+            backgroundColor: theme.palette.background.alt,
+            color: theme.palette.secondary[100],
+            borderTop: "none"
+        }, 
+        "& .MuiDataGrid-toolbarContainer .MuiButton-text" : {
+            color: `${theme.palette.secondary[200]} !important`
+        }
+
+      }}
     
     
     >
