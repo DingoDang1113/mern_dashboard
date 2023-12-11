@@ -4,3 +4,5 @@
 4. comment out insertMany
 5. go to routes -> add router.get(), also import getXXX from controller
 6. go to controller of corresponding element -> setup getXXX
+7. go to frontend -> state api -> set up api endpoints
+8. go to App.js file to import Transaction Page
