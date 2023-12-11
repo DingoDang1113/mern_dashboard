@@ -1,0 +1,6 @@
+1. Model - set up file -> Schema 
+2. Backend Index.Js File -> Load model & data, moongose insertMany
+3. check MongoDB to make sure table is running 
+4. comment out insertMany
+5. go to routes -> add router.get(), also import getXXX from controller
+6. go to controller of corresponding element -> setup getXXX
