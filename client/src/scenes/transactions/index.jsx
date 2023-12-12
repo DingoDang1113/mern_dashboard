@@ -4,7 +4,7 @@ import Header from 'components/Header';
 import { useGetTransactionsQuery } from 'state/api';
 import { DataGrid } from '@mui/x-data-grid';
 import { useTheme } from '@emotion/react';
-import DataGridCustomToolbar from "components/DataGridCustomToolbar";
+import  DataGridCustomToolbar from "components/DataGridCustomToolbar";
 
 const Transactions = () => {
     const theme = useTheme();
@@ -14,6 +14,8 @@ const Transactions = () => {
     const [pageSize, setPageSize ] = useState(20);
     const [sort, setSort] = useState({});
     const [search, setSearch] = useState("");
+
+    const [searchInput, setSearchInput] = useState(""); // temp state of search
 
     const {data, isLoading } = useGetTransactionsQuery({
         page, 
@@ -55,8 +57,6 @@ const Transactions = () => {
         }
     ];
 
-
-
   return (
     <Box m='1.5rem 2.5rem'>
         <Header title="TRANSACTIONS" subtitle={"A list of Transactions"} />
@@ -87,7 +87,7 @@ const Transactions = () => {
           }}
         >
             <DataGrid
-              loding={isLoading || !data}
+              loading={isLoading || !data}
               getRowId={(row) => row._id}
               rows={(data && data.transactions) || []}
               columns={columns}
@@ -103,7 +103,10 @@ const Transactions = () => {
               onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
               onSortModelChange={(newSortModel) => setSort(...newSortModel)}
 
-              components={{ Toolbar: DataGridCustomToolbar}}
+              slots={{ Toolbar: DataGridCustomToolbar}}
+              slotProps={{
+                toolbar: { searchInput, setSearchInput, setSearch}
+              }}
 
 
             

@@ -219,11 +219,11 @@ const Sidebar = ({
                      sx={{ objectFit: "cover"}} 
                     />
                         <Box textAlign="left">
-                            <Typography fontWeight="bold" fontsize="0.9rem" sx={{ color: theme.palette.secondary[100]}}
+                            <Typography fontWeight="bold" fontSize="0.9rem" sx={{ color: theme.palette.secondary[100]}}
                             >
                                 {user.name}
                             </Typography>
-                            <Typography  fontsize="0.8rem" sx={{ color: theme.palette.secondary[200]}}
+                            <Typography  fontSize="0.8rem" sx={{ color: theme.palette.secondary[200]}}
                             >
                                 {user.occupation}
                             </Typography>
