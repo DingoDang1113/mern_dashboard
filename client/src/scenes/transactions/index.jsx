@@ -103,8 +103,8 @@ const Transactions = () => {
               onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
               onSortModelChange={(newSortModel) => setSort(...newSortModel)}
 
-              slots={{ Toolbar: DataGridCustomToolbar}}
-              slotProps={{
+              components={{ Toolbar: DataGridCustomToolbar}}
+              componentsProps={{
                 toolbar: { searchInput, setSearchInput, setSearch}
               }}
 
