@@ -34,4 +34,4 @@ const OverviewChart = ({isDashboard = false, view}) => {
   )
 }
 
-export default OverviewChart
+export default OverviewChart;
