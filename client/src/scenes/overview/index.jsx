@@ -16,7 +16,7 @@ const Overview = () => {
         <Header title="OVERVIEW" subtitle={"Overview of general revenue and profit"}   />
 
         <Box height={"75vh"}>
-            <FormControl sx={{ mt: "1rem"}} >
+            <FormControl sx={{ mt: "1.2rem"}} >
                 <InputLabel>View</InputLabel>
                 <Select value={view} label="View"
                 onChange={(e) => setView(e.target.value)} 
