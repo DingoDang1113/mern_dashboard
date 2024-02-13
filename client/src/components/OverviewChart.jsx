@@ -1,37 +1,55 @@
-import React, {useMemo} from 'react';
-import { ResponsiveLine } from '@nivo/line';
+import React, { useMemo } from 'react';
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { useTheme } from '@mui/material';
 import { useGetSalesQuery } from 'state/api';
 
-
-const OverviewChart = ({isDashboard = false, view}) => {
+const OverviewChart = ({ view }) => {
   const theme = useTheme();
-  const {data, isLoading} = useGetSalesQuery();
+  const { data, isLoading } = useGetSalesQuery();
 
-  //recalculate the totals when data change useMemo 
-  
-  const [totalSalesLine, totalUnitsLine] = useMemo(() => {
-    if (!data) return []; 
+  // useMemo to calculate running total chart data
+  const chartData = useMemo(() => {
+    if (!data) return [];
 
-    const { montlyData } = data;
+    const { monthlyData } = data;
+    let runningTotalSales = 0;
+    let runningTotalUnits = 0;
+    let monthAbb = "";
+    
+    return Object.values(monthlyData).map(({ month, totalSales, totalUnits }) => {
+      runningTotalSales += totalSales;
+      runningTotalUnits += totalUnits;
+      monthAbb = month.slice(0,3);
 
-    const totalSalesLine = {
-      id: "totalSales",
-      color: theme.palette.secondary.main,
-      data: [],
-    };
+      return {
+        monthAbb,
+        runningTotalSales,
+        runningTotalUnits,
+      };
+    });
+  }, [data]);
 
-    const totalUnitsLine = {
-      id: "totalUnits",
-      color: theme.palette.secondary[600],
-      data: [],
-    };
-
-  }, [data])
+  if (!data || isLoading) return "Loading...";
 
   return (
-    <div></div>
-  )
-}
+    <ResponsiveContainer width="100%" height={400}>
+      <LineChart
+        data={chartData}
+        margin={{ top: 30, right: 30, left: 20, bottom: 5 }}
+      >
+        <XAxis dataKey="monthAbb" />
+        <YAxis tickFormatter={(value) => `${(value / 1000).toFixed(1)}K`} />
+        <Tooltip />
+        <Legend />
+        <Line
+          type="monotone"
+          dataKey={view === 'sales' ? 'runningTotalSales' : 'runningTotalUnits'}
+          stroke={view === 'sales' ? theme.palette.secondary[700] : theme.palette.secondary[600]}
+          activeDot={{ r: 8 }}
+        />
+      </LineChart>
+    </ResponsiveContainer>
+  );
+};
 
 export default OverviewChart;
