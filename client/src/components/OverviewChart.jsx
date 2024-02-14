@@ -38,7 +38,7 @@ const OverviewChart = ({ view }) => {
         margin={{ top: 30, right: 30, left: 20, bottom: 5 }}
       >
         <XAxis dataKey="monthAbb" />
-        <YAxis tickFormatter={(value) => `${(value / 1000).toFixed(1)}K`} />
+        <YAxis tickFormatter={(value) => `${(value  / 1000).toFixed(1)}K`} />
         <Tooltip />
         <Legend />
         <Line
