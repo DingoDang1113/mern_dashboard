@@ -14,26 +14,30 @@ const Daily = () => {
 
     const formattedData = useMemo(() => {
         if (!data) return [];
-
+    
         const { dailyData } = data;
-
-        const salesData = [];
-        const unitsData = [];
-
-        Object.values(dailyData).forEach(({ date, totalSales, totalUnits }) => {
+    
+        const combinedData = Object.values(dailyData).reduce((acc, { date, totalSales, totalUnits }) => {
             const dateFormatted = new Date(date);
             if (dateFormatted >= startDate && dateFormatted <= endDate) {
-                const formattedDate = `${dateFormatted.getMonth() + 1}/${dateFormatted.getDate()}`;
-                salesData.push({ date: formattedDate, totalSales });
-                unitsData.push({ date: formattedDate, totalUnits });
+                const formattedDate = `${dateFormatted.getMonth() + 1}/${dateFormatted.getDate()}/${dateFormatted.getFullYear()}`;
+                // Check if the date already exists in the accumulator
+                const existingEntry = acc.find(entry => entry.date === formattedDate);
+                if (existingEntry) {
+                    // If the date already exists, update the existing entry
+                    existingEntry.totalSales += totalSales;
+                    existingEntry.totalUnits += totalUnits;
+                } else {
+                    // If the date doesn't exist, add a new entry
+                    acc.push({ date: formattedDate, totalSales, totalUnits });
+                }
             }
-        });
-
-        return [
-            { name: 'Total Sales', data: salesData, dataKey: 'totalSales' },
-            { name: 'Total Units', data: unitsData, dataKey: 'totalUnits' }
-        ];
+            return acc;
+        }, []);
+    
+        return combinedData;
     }, [data, startDate, endDate]);
+    
 
     return (
         <Box m="1.5rem 2.5rem">
@@ -64,25 +68,34 @@ const Daily = () => {
                     <div>Error fetching data</div>
                 ) : (
                     <ResponsiveContainer width="100%" height="100%">
-                        <LineChart
-                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                        >
-                            <XAxis dataKey="date" />
-                            <YAxis />
-                            <Tooltip />
-                            <Legend />
-                            {formattedData.map((line, index) => (
-                                <Line 
-                                    key={index} 
-                                    type="monotone" 
-                                    dataKey={line.dataKey} 
-                                    data={line.data} 
-                                    name={line.name} 
-                                    stroke={theme.palette.secondary.main} 
-                                />
-                            ))}
-                        </LineChart>
-                    </ResponsiveContainer>
+                    <LineChart data={formattedData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                        <XAxis dataKey="date" />
+                        {/* Primary Y-axis for Total Sales */}
+                        <YAxis yAxisId="0" orientation="left" stroke={theme.palette.primary[100]} />
+                        {/* Secondary Y-axis for Total Units */}
+                        <YAxis yAxisId="1" orientation="right" stroke={theme.palette.secondary[300]} />
+                        <Tooltip />
+                        <Legend />
+                        <Line 
+                            type="monotone" 
+                            dataKey="totalSales" 
+                            stroke={theme.palette.primary[200]} 
+                            name="Total Sales"
+                            yAxisId="0" // Links this line to the primary Y-axis
+                            dot={false}
+                        />
+                        <Line 
+                            type="natural" 
+                            dataKey="totalUnits" 
+                            stroke={theme.palette.secondary[500]} 
+                            name="Total Units"
+                            yAxisId="1" // Links this line to the secondary Y-axis
+                            dot={false}
+                        />
+                    </LineChart>
+                </ResponsiveContainer>
+                
+
                 )}
             </Box>
         </Box>
