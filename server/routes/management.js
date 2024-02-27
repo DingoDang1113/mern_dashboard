@@ -3,6 +3,6 @@ import {getAdmins} from "../controllers/management.js";
 
 const router = express.Router();
 
-router.get("/admin", getAdmins)
+router.get("/admins", getAdmins)
 
 export default router;
