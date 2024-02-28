@@ -18042,7 +18042,7 @@ export const dataAffiliateStat = [
     {
       _id: "63701cc1f03239b7f700000e",
       name: "Shali",
-      email: "swelbeck12@ycombinator.com",
+      email: "shalipeng109@gmail.com",
       password: "RSjzmAjnq",
       city: "San Francisco",
       state: null,
