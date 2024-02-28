@@ -3,7 +3,17 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const api = createApi( {
     baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_BASE_URL}),   // link to the .env.local file port 
     reducerPath: "adminApi", 
-    tagTypes: ["User", "Products", "Customers", "Transactions", "Geography", "Sales", "Admins"], 
+    tagTypes: [
+        "User",
+        "Products",
+        "Customers",
+        "Transactions",
+        "Geography",
+        "Sales",
+        "Admins",
+        "Performance",
+        "Dashboard",
+      ],
     endpoints: (build) => ({
         /* identify the API calls we're gonna make */
         getUser: build.query({
@@ -46,6 +56,11 @@ export const api = createApi( {
 
         }),
 
+        getUserPerformance: build.query({
+            query: (id) => `management/performance/${id}`,
+            providesTags: ["Performance"],
+        }),
+
 
     })
 })
@@ -57,6 +72,7 @@ export const {
     useGetTransactionsQuery, 
     useGetGeographyQuery,
     useGetSalesQuery,
-    useGetAdminsQuery,
+    useGetAdminsQuery,            
+    useGetUserPerformanceQuery,
 
 } = api;
