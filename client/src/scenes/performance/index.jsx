@@ -10,8 +10,10 @@ const Performance = () => {
   const theme = useTheme();
   const userId = useSelector((state) => state.global.userId);
   const { data, isLoading } = useGetUserPerformanceQuery(userId);
+  
 
-//   console.log(state)
+  console.log(data)
+
 
   const columns = [
     {
@@ -24,6 +26,11 @@ const Performance = () => {
       headerName: "User ID",
       flex: 1,
     },
+    {
+        field: "name",
+        headerName: "Name",
+        flex: 1,
+      },
     {
       field: "createdAt",
       headerName: "CreatedAt",
