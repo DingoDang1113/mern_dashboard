@@ -7,7 +7,7 @@ import { Box, Button, Typography, useTheme, useMediaQuery  } from '@mui/material
 import { DataGrid } from '@mui/x-data-grid';
 import BreakdownChart from 'components/BreakdownChart';
 import OverviewChart from 'components/OverviewChart';
-
+import StatBox from 'components/StatBox';
 
 
 const Dashboard = () => {
@@ -15,7 +15,7 @@ const Dashboard = () => {
   const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
   const{ data, isLoading } = useGetDashboardQuery();
 
-  // console.log(data)
+  console.log(data)
 
   const columns = [
       {
@@ -81,6 +81,54 @@ const Dashboard = () => {
         }}
       >
         {/* Row 1 */}
+        <StatBox
+          title="Total Customers"
+          value={ data && data.totalCustomers}
+          increase="+14%"
+          description="Since last month"
+          icon = {
+            <Email sx={{ color: theme.palette.secondary[300], fontSize: "20px" }} />
+          }
+        />
+
+        <StatBox
+          title="Sales Today"
+          value={ data && data.todayStats.totalSales}
+          increase="+21%"
+          description="Since yesterday"
+          icon = {
+            <PointOfSale sx={{ color: theme.palette.secondary[300], fontSize: "20px" }} />
+          }
+        />
+        <Box
+          gridColumn = "span 8"
+          gridRow  = "span 2"
+          backgroundColor = {theme.palette.background.alt}
+          p="1rem"
+          borderRadius="0.55rem"
+        >
+          <OverviewChart view="sales" isDashboard={true} />
+
+        </Box>
+
+        <StatBox
+          title="Monthly Sales"
+          value={ data && data.thisMonthStats.totalSales}
+          increase="+5%"
+          description="Since last month"
+          icon = {
+            <PersonAdd sx={{ color: theme.palette.secondary[300], fontSize: "20px" }} />
+          }
+        />
+        <StatBox
+          title="Yearly Sales"
+          value={ data && data.yearlySalesTotal}
+          increase="+43%"
+          description="Since last year"
+          icon = {
+            <Traffic sx={{ color: theme.palette.secondary[300], fontSize: "20px" }} />
+          }
+        />
 
 
 
