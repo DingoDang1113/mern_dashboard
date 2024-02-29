@@ -61,6 +61,11 @@ export const api = createApi( {
             providesTags: ["Performance"],
         }),
 
+        getDashboard: build.query({
+            query: (id) => `general/dashboard`,
+            providesTags: ["Dashboard"],
+        }),
+
 
     })
 })
@@ -74,5 +79,6 @@ export const {
     useGetSalesQuery,
     useGetAdminsQuery,            
     useGetUserPerformanceQuery,
+    useGetDashboardQuery,
 
 } = api;
