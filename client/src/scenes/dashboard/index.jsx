@@ -20,11 +20,13 @@ const Dashboard = () => {
 
   const downloadPDF = () => {
     const input = document.body;
-    html2canvas(input)
+    html2canvas(input, { scale: 2} )
        .then((canvas) => {
         const imgData = canvas.toDataURL('image/png');
         const pdf = new jsPDF({
           orientation: "landscape",
+          unit: 'px',
+          format: [canvas.width, canvas.height]
         });
 
         const imgProps = pdf.getImageProperties(imgData);
@@ -47,6 +49,7 @@ const Dashboard = () => {
 
         <Box>
           <Button
+            onClick={downloadPDF}
             sx = {{
               backgroundColor: theme.palette.secondary.light,
               color: theme.palette.background.alt,
