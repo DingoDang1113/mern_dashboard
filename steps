@@ -8,3 +8,7 @@
 8. go to App.js file to import XXX Page from scenes -> add routes for xxxx
 9. go to scenes to create XXX folder with index.jsx Page
 10. go to index.jsx page -> build out xxx page
+
+
+
+----

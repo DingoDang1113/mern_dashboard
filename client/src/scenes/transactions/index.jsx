@@ -6,7 +6,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import { useTheme } from '@emotion/react';
 import  DataGridCustomToolbar from "components/DataGridCustomToolbar";
 
-const Transactions = () => {
+const Transactions = ({ isDashboard }) => {
     const theme = useTheme();
 
     //values to be sent to the backend 
@@ -58,8 +58,8 @@ const Transactions = () => {
     ];
 
   return (
-    <Box m='1.5rem 2.5rem'>
-        <Header title="TRANSACTIONS" subtitle={"A list of Transactions"} />
+    <Box m={ isDashboard ? "" : '1.5rem 2.5rem'}>
+        { isDashboard ? "" : <Header title="TRANSACTIONS" subtitle={"A list of Transactions"} />}
         <Box height={"80vh"}
           sx={{
             "& .MuiDataGrid-root": {
@@ -74,7 +74,7 @@ const Transactions = () => {
                 borderBottom: "none"
             }, 
             "& .MuiDataGrid-virtualScroller": {
-                backgroundColor: theme.palette.primary.light,
+                backgroundColor: isDashboard ? theme.palette.background.alt : theme.palette.primary.light,
             }, 
             "& .MuiDataGrid-footerContainer": {
                 backgroundColor: theme.palette.background.alt,
@@ -91,9 +91,9 @@ const Transactions = () => {
               getRowId={(row) => row._id}
               rows={(data && data.transactions) || []}
               columns={columns}
+             
               rowCount={(data && data.total) || 0}
-              rowsPerPageOption={[20, 50, 100]}
-              
+              rowsPerPageOption={[20, 50, 100]} 
               pagination
               page={page}
               pageSize={pageSize}
@@ -103,7 +103,7 @@ const Transactions = () => {
               onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
               onSortModelChange={(newSortModel) => setSort(...newSortModel)}
 
-              components={{ Toolbar: DataGridCustomToolbar}}
+              components={ isDashboard ? "" : { Toolbar: DataGridCustomToolbar}}
               componentsProps={{
                 toolbar: { searchInput, setSearchInput, setSearch}
               }}
