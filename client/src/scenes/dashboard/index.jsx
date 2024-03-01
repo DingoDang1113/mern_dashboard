@@ -8,6 +8,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import BreakdownChart from 'components/BreakdownChart';
 import OverviewChart from 'components/OverviewChart';
 import StatBox from 'components/StatBox';
+import Transactions from 'scenes/transactions';
 
 
 const Dashboard = () => {
@@ -106,8 +107,11 @@ const Dashboard = () => {
           backgroundColor = {theme.palette.background.alt}
           p="1rem"
           borderRadius="0.55rem"
+          display="flex"
+          style={{ width: "100%", height: "100%" }}
+          // overflow="hidden"
         >
-          <OverviewChart view="sales" isDashboard={true} />
+          <OverviewChart view="sales" isDashboard={true} style={{ width: "100%", height: "100%" }} />
 
         </Box>
 
@@ -131,9 +135,49 @@ const Dashboard = () => {
         />
 
 
+      {/* Row 2 */}
+
+      <Box
+       gridColumn="span 7"
+       gridRow = "span 3"
+       overflow="hidden"
+      >
+        <Transactions isDashboard={true} />
+
+      </Box>
+
+      <Box
+        gridColumn="span 5"
+        gridRow="span 3"
+        backgroundColor= {theme.palette.background.alt}
+        p="1.5rem"
+        borderRadius="0.55rem"
+      >
+        <Typography variant='h6' sx={{ color: theme.palette.secondary[100] }}>
+          Sales By Category
+        </Typography>
+
+        <BreakdownChart isDashboard={true} />
+        <Typography 
+          p="0, 0.6rem"
+          fontSize="0.8rem"
+          sx = {{ color: theme.palette.secondary[200]}}
+         >
+          Breakdown of real states and information via category for revenue made for this year and total sales.
+
+
+        </Typography>
 
 
       </Box>
+
+
+
+
+
+      </Box>
+
+
 
 
 

@@ -3,7 +3,7 @@ import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tool
 import { useTheme } from '@mui/material';
 import { useGetSalesQuery } from 'state/api';
 
-const OverviewChart = ({ view }) => {
+const OverviewChart = ({ view, isDashboard }) => {
   const theme = useTheme();
   const { data, isLoading } = useGetSalesQuery();
 
@@ -32,10 +32,10 @@ const OverviewChart = ({ view }) => {
   if (!data || isLoading) return "Loading...";
 
   return (
-    <ResponsiveContainer width="100%" height={400}>
+    <ResponsiveContainer width="100%" height={ isDashboard ? "100%" : 400}>
       <LineChart
         data={chartData}
-        margin={{ top: 30, right: 30, left: 20, bottom: 5 }}
+        margin={{ top: 15, right: 30, left: 20, bottom: 5 }}
       >
         <XAxis dataKey="monthAbb" />
         <YAxis tickFormatter={(value) => `${(value  / 1000).toFixed(1)}K`} />
