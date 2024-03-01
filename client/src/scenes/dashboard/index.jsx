@@ -84,7 +84,7 @@ const Dashboard = () => {
         {/* Row 1 */}
         <StatBox
           title="Total Customers"
-          value={ data && data.totalCustomers}
+          value={new Intl.NumberFormat('en-US').format(data?.totalCustomers ?? 0)}
           increase="+14%"
           description="Since last month"
           icon = {
@@ -94,7 +94,7 @@ const Dashboard = () => {
 
         <StatBox
           title="Sales Today"
-          value={ data && data.todayStats.totalSales}
+          value={new Intl.NumberFormat('en-US').format(data?.todayStats.totalSales ?? 0)}
           increase="+21%"
           description="Since yesterday"
           icon = {
@@ -117,7 +117,7 @@ const Dashboard = () => {
 
         <StatBox
           title="Monthly Sales"
-          value={ data && data.thisMonthStats.totalSales}
+          value={new Intl.NumberFormat('en-US').format(data?.thisMonthStats.totalSales ?? 0)}
           increase="+5%"
           description="Since last month"
           icon = {
@@ -126,7 +126,7 @@ const Dashboard = () => {
         />
         <StatBox
           title="Yearly Sales"
-          value={ data && data.yearlySalesTotal}
+          value={new Intl.NumberFormat('en-US').format(data?.yearlySalesTotal ?? 0)}
           increase="+43%"
           description="Since last year"
           icon = {
