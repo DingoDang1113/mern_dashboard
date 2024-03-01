@@ -2,13 +2,15 @@ import React from 'react';
 import { useGetDashboardQuery } from 'state/api';
 import FlexBetween from 'components/FlexBetween';
 import Header from 'components/Header';
-import { DownloadOutlined, Email, PointOfSale, PersonAdd, Traffic } from '@mui/icons-material';
+import { DownloadOutlined, Email, PointOfSale, PersonAdd, Traffic, Landscape } from '@mui/icons-material';
 import { Box, Button, Typography, useTheme, useMediaQuery  } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import BreakdownChart from 'components/BreakdownChart';
 import OverviewChart from 'components/OverviewChart';
 import StatBox from 'components/StatBox';
 import Transactions from 'scenes/transactions';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 
 const Dashboard = () => {
@@ -16,38 +18,26 @@ const Dashboard = () => {
   const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
   const{ data, isLoading } = useGetDashboardQuery();
 
-  console.log(data)
+  const downloadPDF = () => {
+    const input = document.body;
+    html2canvas(input)
+       .then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF({
+          orientation: "landscape",
+        });
 
-  const columns = [
-      {
-          field: "_id", 
-          headerName: "ID",
-          flex: 1,
-      },
-      {
-          field: "userId", 
-          headerName: "User ID",
-          flex: 1,
-      },       
-      {
-          field: "createdAt", 
-          headerName: "CreatedAt",
-          flex: 1,
-      },
-      {
-          field: "products",
-          headerName: "# of Products",
-          flex: 0.5,
-          sortable: false,
-          renderCell: (params) => params.value.length
-      }, 
-      {
-          field: "cost",
-          headerName: "Cost",
-          flex: 1,
-          renderCell: (params) => `$${Number(params.value).toFixed(2)}`,
-      }
-  ];
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        pdf.save("dashboard.pdf");
+       })
+       .catch((err) => {
+        console.error("Error generating PDF", err);
+       });
+  };
+
 
 
   return (
