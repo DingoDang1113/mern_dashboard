@@ -19,7 +19,7 @@ const Dashboard = () => {
   const{ data, isLoading } = useGetDashboardQuery();
 
   const downloadPDF = () => {
-    const input = document.body;
+    const input = document.getElementById("pdf");
     html2canvas(input, { scale: 2} )
        .then((canvas) => {
         const imgData = canvas.toDataURL('image/png');
@@ -47,7 +47,7 @@ const Dashboard = () => {
       <FlexBetween>
         <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
 
-        <Box>
+        <Box id="pdf">
           <Button
             onClick={downloadPDF}
             sx = {{
