@@ -24,7 +24,7 @@ const Dashboard = () => {
        .then((canvas) => {
         const imgData = canvas.toDataURL('image/png');
         const pdf = new jsPDF({
-          orientation: "landscape",
+          orientation: "portait",
           unit: 'px',
           format: [canvas.width, canvas.height]
         });
