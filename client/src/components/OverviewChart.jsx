@@ -40,20 +40,21 @@ const OverviewChart = ({ view, isDashboard }) => {
         <XAxis 
           dataKey="monthAbb"
           // stroke={theme.palette.secondary[100]} 
-          tick={{ fontWeight: "normal"}}
+          
         />
         <YAxis 
           tickFormatter={(value) => `${(value  / 1000).toFixed(1)}K`} 
           // stroke={theme.palette.secondary[100]} 
           
         />
-        <Tooltip />
+        <Tooltip formatter={(value) => new Intl.NumberFormat('en-US').format(value)}/>
         <Legend />
         <Line
           type="monotone"
           dataKey={view === 'sales' ? 'runningTotalSales' : 'runningTotalUnits'}
           stroke={view === 'sales' ? theme.palette.secondary[700] : theme.palette.secondary[600]}
           activeDot={{ r: 8 }}
+          strokeWidth={2}
         />
       </LineChart>
     </ResponsiveContainer>
