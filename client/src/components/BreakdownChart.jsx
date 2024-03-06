@@ -11,9 +11,9 @@ const BreakdownChart = ({ isDashboard = false }) => {
 
     const COLORS = [
         theme.palette.secondary[500],
+        theme.palette.secondary[400],
         theme.palette.secondary[300],
-        theme.palette.secondary[300],
-        theme.palette.secondary[500],
+        theme.palette.secondary[200],
     ];
 
     const formattedData = Object.entries(data.salesByCategory).map(
@@ -38,7 +38,7 @@ const BreakdownChart = ({ isDashboard = false }) => {
             cx="50%"
             cy="50%"
             labelLine={false}
-            outerRadius={isDashboard ? "60%" : "80%"}
+            outerRadius={isDashboard ? "50%" : "80%"}
             fill="#8884d8"
             dataKey="value"
             nameKey="name"
@@ -49,21 +49,21 @@ const BreakdownChart = ({ isDashboard = false }) => {
             ))}
           </Pie>
           <Tooltip />
-          <Legend />
+          {/* <Legend /> */}
         </PieChart>
       </ResponsiveContainer>
       <Box
         position="absolute"
-        top="50%"
+        top="8%"
         left="50%"
-        color={theme.palette.secondary[400]}
+        color={theme.palette.secondary[600]}
         textAlign="center"
         pointerEvents="none"
         sx={{
           transform: isDashboard ? "translate(-50%, -50%)" : "translate(-50%, -50%)",
         }}
       >
-        <Typography variant="h6">Total: ${data.yearlySalesTotal}</Typography>
+        <Typography variant="h5">Total: ${ new Intl.NumberFormat('en-us').format( data.yearlySalesTotal )}</Typography>
       </Box>
 
 
