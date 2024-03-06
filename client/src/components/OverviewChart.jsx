@@ -37,8 +37,16 @@ const OverviewChart = ({ view, isDashboard }) => {
         data={chartData}
         margin={{ top: 15, right: 30, left: 20, bottom: 5 }}
       >
-        <XAxis dataKey="monthAbb" />
-        <YAxis tickFormatter={(value) => `${(value  / 1000).toFixed(1)}K`} />
+        <XAxis 
+          dataKey="monthAbb"
+          // stroke={theme.palette.secondary[100]} 
+          tick={{ fontWeight: "normal"}}
+        />
+        <YAxis 
+          tickFormatter={(value) => `${(value  / 1000).toFixed(1)}K`} 
+          // stroke={theme.palette.secondary[100]} 
+          
+        />
         <Tooltip />
         <Legend />
         <Line

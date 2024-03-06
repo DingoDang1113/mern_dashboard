@@ -21,7 +21,7 @@ const Dashboard = () => {
     const input = document.getElementById("pdf");
     html2canvas(input, { 
       scale: 2,
-      backgroundColor:theme.palette.background.alt,
+      backgroundColor:theme.palette.background.default,
     } )
        .then((canvas) => {
         const imgData = canvas.toDataURL('image/png');
