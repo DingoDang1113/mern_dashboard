@@ -19,19 +19,20 @@ const Dashboard = () => {
 
   const downloadPDF = () => {
     const input = document.getElementById("pdf");
-    html2canvas(input, { scale: 2} )
+    html2canvas(input, { 
+      scale: 2,
+      backgroundColor:theme.palette.background.alt,
+    } )
        .then((canvas) => {
         const imgData = canvas.toDataURL('image/png');
         const pdf = new jsPDF({
-          orientation: "portait",
+          orientation: "landscpae",
           unit: 'px',
           format: [canvas.width, canvas.height]
         });
 
-        const imgProps = pdf.getImageProperties(imgData);
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+ 
+        pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
         pdf.save("dashboard.pdf");
        })
        .catch((err) => {
@@ -46,7 +47,7 @@ const Dashboard = () => {
       <FlexBetween>
         <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
 
-        <Box id="pdf">
+        <Box >
           <Button
             onClick={downloadPDF}
             sx = {{
@@ -64,6 +65,7 @@ const Dashboard = () => {
       </FlexBetween>
 
       <Box
+        id="pdf"
         mt="20px"
         display="grid"
         gridTemplateColumns="repeat(12, 1fr)"
