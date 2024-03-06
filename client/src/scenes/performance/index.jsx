@@ -12,7 +12,7 @@ const Performance = () => {
   const { data, isLoading } = useGetUserPerformanceQuery(userId);
   
 
-  console.log(data)
+  // console.log(data)
 
 
   const columns = [
