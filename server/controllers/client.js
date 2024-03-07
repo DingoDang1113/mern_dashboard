@@ -1,8 +1,12 @@
 import Product from "../models/product.js";
 import ProductStat from "../models/ProductStat.js";
+<<<<<<< HEAD
 import User from "../models/User.js";
 import Transaction from "../models/Transaction.js";
 import getCountryIso3 from "country-iso-2-to-3";
+=======
+import User from "../models/User.js"
+>>>>>>> parent of 09c9e66 (set up transaction backend)
 
 
 export const getProducts = async(req, res) => {
@@ -40,6 +44,7 @@ export const getCustomers = async(req, res) => {
         res.status(404).json({ message: error.message });
     }
 };
+<<<<<<< HEAD
 
 
 export const getTransactions = async(req, res) => {
@@ -113,3 +118,5 @@ export const getGeography = async(req, res) => {
 
 
 }
+=======
+>>>>>>> parent of 09c9e66 (set up transaction backend)

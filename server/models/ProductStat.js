@@ -21,7 +21,7 @@ const ProductStatSchema = new mongoose.Schema(
             }, 
         ],
     }, 
-    { timestamps: true}
+    { timestamps: true }
 ); 
 
 const ProductStat = mongoose.model("ProductStat", ProductStatSchema);
