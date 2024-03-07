@@ -74,7 +74,7 @@ const navItems = [
         icon: <TodayOutlined />    
     },  
     {
-        text: "Montly", 
+        text: "Monthly", 
         icon: <CalendarMonthOutlined />    
     },  
     {
@@ -82,7 +82,7 @@ const navItems = [
         icon: <PieChartOutlined />    
     },  
     {
-        text: "Managment", 
+        text: "Management", 
         icon: null  
     },  
     {
@@ -134,12 +134,12 @@ const Sidebar = ({
                 
             }}
         >
-            <Box width="100%" height="100%">
+            <Box width="100%" display="flex" flexDirection="column" sx={{ postion: "relative"}}>
                 <Box m= "1.5rem 2rem 0.5rem 3rem">
                     <FlexBetween color={theme.palette.secondary.main}>
                         <Box display="flex" alignItems="center" gap="0.5rem" >
                             <Typography variant='h4' fontWeight="bold" >
-                                ECOMVISION
+                                PORTAL
                             </Typography>
                         </Box>
                         {/* If on mobile screen, a button to close side bar */}
@@ -151,7 +151,7 @@ const Sidebar = ({
                     </FlexBetween>
                 </Box>
                 {/* List of NavItems */}
-                <List>
+                <List sx={{ flex: 1, overflowY: "auto" }}>
                     {navItems.map(({text, icon}) => {
                         if (!icon) {
                             return (
@@ -206,7 +206,16 @@ const Sidebar = ({
                 </List>
 
             </Box>
-            <Box position="absolute" bottom="2rem">
+            <Box className="profileImage" sx={{ 
+                position:"sticky", 
+                bottom: 0,
+                zIndex: 1,
+                backgroundColor: theme.palette.alt,
+                mt: "auto",
+                py: "1rem",
+                borderTop: `1px solid ${theme.palette.secondary[200]}`,
+                }}>
+
                 <Divider />
                 <FlexBetween textTransform="none" gap="1rem" m="1.5rem 2rem 0 3rem">
                     <Box 
@@ -219,11 +228,11 @@ const Sidebar = ({
                      sx={{ objectFit: "cover"}} 
                     />
                         <Box textAlign="left">
-                            <Typography fontWeight="bold" fontsize="0.9rem" sx={{ color: theme.palette.secondary[100]}}
+                            <Typography fontWeight="bold" fontSize="0.9rem" sx={{ color: theme.palette.secondary[100]}}
                             >
                                 {user.name}
                             </Typography>
-                            <Typography  fontsize="0.8rem" sx={{ color: theme.palette.secondary[200]}}
+                            <Typography  fontSize="0.8rem" sx={{ color: theme.palette.secondary[200]}}
                             >
                                 {user.occupation}
                             </Typography>
