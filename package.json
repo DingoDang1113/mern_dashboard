@@ -25,5 +25,8 @@
     "url": "https://github.com/DingoDang1113/mern_dashboard/issues"
   },
   "homepage": "https://github.com/DingoDang1113/mern_dashboard#readme",
-  "proxy": "http://localhost:5001"
+  "proxy": "http://localhost:5001",
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+  }
 }
