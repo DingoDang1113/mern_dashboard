@@ -5,6 +5,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import path from 'path';
+
 
 import clientRoutes from "./routes/client.js";
 import generalRoutes from "./routes/general.js";
@@ -25,18 +27,34 @@ import { dataUser, dataProduct, dataProductStat, dataTransaction, dataOverallSta
 /* CONFIGURATION */
 dotenv.config();
 const app = express();
-app.use(express.json());
+app.use(express.json());  //accept json data
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin"}));
 app.use(morgan("common"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended:false }));
 app.use(cors());
 
-/* Routes assign */
+/* Routes */
 app.use("/client", clientRoutes);
 app.use("/general", generalRoutes);
 app.use("/management", managementRoutes);
 app.use("/sales", salesRoutes);
+
+// deployment 
+
+const __dirname = path.resolve();
+
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, '../client/build')));
+
+    app.get("*", (req, res) =>
+        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
+    );
+} else {
+    app.get("/", (req, res) => {
+        res.send("API is running");
+    });
+}
 
 
 
