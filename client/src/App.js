@@ -34,7 +34,7 @@ function App() {
             <Routes>
 
               <Route element={<Layout />}>  {/* Layout component will be the main parent for any route included below */}
-                <Route path="/" element = {<Navigate to="/dashboard" replace />}  />  {/* Navigate component - will navigate to dashboard page if we land on default page */}
+                <Route path="/" element = {<Navigate to="/dashboard" replace={true} />}  />  {/* Navigate component - will navigate to dashboard page if we land on default page */}
                 <Route path="/dashboard" element={<Dashboard />}/>   {/* render dashboard */}
                 <Route path="/products" element={<Products />}  />
                 <Route path="/customers" element={<Customers/>} />
